@@ -33,7 +33,9 @@ bookDisplay.addEventListener("click", function (event) {
     const book = libraryBooks.find((b) => b.id === id);
     if (book) {
       book.toggleStatus();
-      displayBooks();
+      const bookCard = event.target.closest(".book-card");
+      const statusText = bookCard.querySelector(".status-text");
+      statusText.textContent = `Status: ${book.status ? "Read" : "Not Read"}`;
     }
   }
   // Remove Book
@@ -42,7 +44,8 @@ bookDisplay.addEventListener("click", function (event) {
     const index = libraryBooks.findIndex((b) => b.id === id);
     if (index !== -1) {
       libraryBooks.splice(index, 1);
-      displayBooks();
+      const bookCard = event.target.closest(".book-card");
+      bookCard.remove();
     }
   }
 });
@@ -65,7 +68,7 @@ function displayBooks() {
       <p>Author: ${book.author}</p>
       <p>Title: ${book.title}</p>
       <p>Number of Pages: ${book.pages}</p>
-      <p>Status: ${book.status ? "Read" : "Not Read"}</p>
+      <p class="status-text">Status: ${book.status ? "Read" : "Not Read"}</p>
       <button class="toggle-btn" data-id="${book.id}">Toggle Status</button>
       <button class="remove-btn" data-id="${book.id}">Remove</button>
     `;
