@@ -3,17 +3,18 @@ const libraryBooks = [];
 const formSubmission = document.querySelector(".book-form");
 const bookDisplay = document.querySelector(".book-display");
 
-function Book(author, title, pages, status) {
-  this.id = crypto.randomUUID();
-  this.author = author;
-  this.title = title;
-  this.pages = pages;
-  this.status = status;
+class Book {
+  constructor(author, title, pages, status) {
+    this.id = crypto.randomUUID();
+    this.author = author;
+    this.title = title;
+    this.pages = pages;
+    this.status = status;
+  }
+  toggleStatus() {
+    this.status = !this.status;
+  }
 }
-
-Book.prototype.toggleStatus = function () {
-  this.status = !this.status;
-};
 
 formSubmission.addEventListener("submit", function (event) {
   event.preventDefault();
